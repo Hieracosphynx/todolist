@@ -1,0 +1,16 @@
+.todo-list__container {
+  display: flex;
+  justify-content: center;
+  background-color: rgb(201, 174, 174);
+}
+
+.todo-list__controls {
+  height: auto;
+  width: 50%;
+  flex-direction: column;
+  background-color: black;
+}
+
+.todo-list__control {
+  color: white;
+}

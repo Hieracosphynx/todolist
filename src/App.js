@@ -1,25 +1,32 @@
-import logo from './logo.svg';
+import React, { useState } from 'react';
+import ToDoTasks from './components/ToDoTasks/ToDoTasks';
+import NewToDo from './components/NewToDo/NewToDo';
 import './App.css';
 
-function App() {
+const App = () => {
+  const [toDoTasks, setToDoTasks] = useState([
+    {
+      id: 1,
+      task: 'MyFirstTask',
+    },
+    {
+      id: 2,
+      task: 'MySecondTask',
+    },
+  ]);
+
+  const addTaskHandler = (task) => {
+    setToDoTasks((prevTasks) => {
+      return [...prevTasks, task];
+    });
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <ToDoTasks values={toDoTasks} />
+      <NewToDo addTask={addTaskHandler} />
     </div>
   );
-}
+};
 
 export default App;

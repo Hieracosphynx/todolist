@@ -4,21 +4,20 @@ const NewToDoForm = (props) => {
   const [task, setTask] = useState('');
 
   const taskHandler = (e) => {
-    console.log(e.target.value);
     setTask(e.target.value);
   };
 
   const formHandler = (e) => {
     e.preventDefault();
-
     props.saveTask(task);
+    setTask('');
   };
 
   return (
     <div>
       <form onSubmit={formHandler}>
         <label>Task</label>
-        <input type='text' onChange={taskHandler} />
+        <input type='text' value={task} onChange={taskHandler} />
         <button type='submit'>Add</button>
       </form>
     </div>

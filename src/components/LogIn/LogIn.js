@@ -7,7 +7,6 @@ const emailReducerHandler = (state, action) => {
   if (action.type === 'EMAIL_BLUR_INPUT') {
     return { emailValue: state.emailValue, emailIsValid: state.emailIsValid };
   }
-
   return {
     emailValue: '',
     emailIsValid: false,
@@ -46,18 +45,19 @@ const LogIn = (props) => {
     }
   );
 
+  const { emailIsValid: emailValid } = emailReducer;
+  const { passwordIsValid: passwordValid } = passwordReducer;
+
   useEffect(() => {
     const identifier = setTimeout(
-      setIsFormValid(
-        emailReducer.emailIsValid && passwordReducer.passwordIsValid
-      ),
+      setIsFormValid(emailValid && passwordValid),
       500
     );
 
     return () => {
       clearTimeout(identifier);
     };
-  }, [emailReducer.emailIsValid, passwordReducer.passwordIsValid]);
+  }, [emailValid, passwordValid]);
 
   const emailHandler = (e) => {
     dispatchEmailReducer({

@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useReducer } from 'react';
-
+import React, { useState, useEffect, useReducer, useContext } from 'react';
+import AuthContext from '../../context/auth-context';
 const emailReducerHandler = (state, action) => {
   if (action.type === 'EMAIL_INPUT') {
     return { emailValue: action.val, emailIsValid: action.val.includes('@') };
@@ -31,6 +31,8 @@ const passwordReducerHandler = (state, action) => {
 
 const LogIn = (props) => {
   const [isFormValid, setIsFormValid] = useState();
+
+  const authCtx = useContext(AuthContext);
 
   const [emailReducer, dispatchEmailReducer] = useReducer(emailReducerHandler, {
     emailValue: '',
@@ -82,8 +84,10 @@ const LogIn = (props) => {
   };
 
   const logInHandler = (e) => {
+    const email = emailReducer.value;
+    const password = passwordReducer.value;
     e.preventDefault();
-    props.onLogIn();
+    authCtx.onLogIn(email, password);
   };
 
   return (

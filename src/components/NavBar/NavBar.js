@@ -2,12 +2,12 @@ import React, { useContext } from 'react';
 import AuthContext from '../../context/auth-context';
 import classes from './NavBar.module.css';
 
-const NavBar = (props) => {
-  const ctx = useContext(AuthContext);
+const NavBar = () => {
+  const authCtx = useContext(AuthContext);
 
   return (
     <nav className={classes.navbar}>
-      {ctx.isLoggedIn && <button onClick={props.logOut}>Logout</button>}
+      {authCtx.isLoggedIn && <button onClick={authCtx.onLogOut}>Logout</button>}
     </nav>
   );
 };

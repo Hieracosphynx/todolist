@@ -2,6 +2,9 @@ import React, { useState, useEffect } from 'react';
 import ToDoTasks from './components/ToDoTasks/ToDoTasks';
 import NewToDo from './components/NewToDo/NewToDo';
 import LogIn from './components/LogIn/LogIn';
+import NavBar from './components/NavBar/NavBar';
+import AuthContext from './context/auth-context';
+
 import './App.css';
 
 const App = () => {
@@ -31,18 +34,20 @@ const App = () => {
   };
 
   return (
-    <div>
+    <AuthContext.Provider
+      value={{
+        isLoggedIn: isLoggedIn,
+      }}
+    >
+      <NavBar logOut={logOutHandler} />
       {isLoggedIn && (
         <>
-          <button type='button' onClick={logOutHandler}>
-            LogOut
-          </button>
           <NewToDo addTask={addTaskHandler} />
           <ToDoTasks values={toDoTasks} />
         </>
       )}
       {!isLoggedIn && <LogIn onLogIn={LogInHandler} />}
-    </div>
+    </AuthContext.Provider>
   );
 };
 
